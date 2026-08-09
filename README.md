@@ -9,7 +9,7 @@
 >
 > 把《温病条辨》《吴鞠通医案》《医医病书》《温热经纬》蒸馏成一个可被 AI 调用、可独立思考、可质证追问的中医角色 Skill。
 
-<div align="center">
+
 
 [![Version](https://img.shields.io/badge/version-V3.1-2ea44f?style=flat-square)](#-版本演进)
 [![Cases](https://img.shields.io/badge/医案-359%20案-blueviolet?style=flat-square)](#-医案库)
