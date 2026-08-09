@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# 编辑器
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# 临时文件
+*.bak
+*.tmp
+*.log
+*.pyc
+__pycache__/
+*.egg-info/
+node_modules/
+
+# 沙箱脚本残留
+push_github.py
+*.bak
