@@ -29,6 +29,38 @@
 > 当你问 AI 一个温病问题，它**不再照搬伤寒六经模板**，而是站到吴鞠通的位置，先问"病在哪一焦（肺/脾胃/肝肾）"、"传变到卫气营血哪一层"、"津液存亡如何"，再决定用银翘散辛凉平剂、还是清营汤凉营透热、还是复脉法育阴。
 
 ---
+## 快速安装
+
+<details open>
+<summary><b> ClawHub（推荐）</b></summary>
+
+```bash
+openclaw skills install @jangviktor-web/wujutong
+```
+</details>
+
+
+<details>
+<summary><b>OpenClaw / OpenClawMP / 手动安装</b></summary>
+
+```bash
+# OpenClaw
+openclaw skills install @jangviktor-web/wujutong
+
+
+# 手动
+git clone https://github.com/jangviktor-web/wujutong.git
+cp -r wujutong/ ~/.claude/skills/wujutong/
+```
+</details>
+
+<details>
+<summary><b>手机端（腾讯 IMA APP）</b></summary>
+
+下载腾讯 IMA APP，在copilot skill 搜索🔍吴鞠通安装即可
+
+
+---
 
 ## 📑 目录
 
