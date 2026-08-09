@@ -1,3 +1,8 @@
+<div align="center">
+  
+<img width="120" alt="1000015201" src="https://github.com/user-attachments/assets/89af8070-a9f7-4c74-9f27-11e9426d1343" />
+
+
 # 🩺 温病派大师 · 吴鞠通 Skill
 
 > **清代温病学派集大成者 · 三焦辨证思维操作系统**
