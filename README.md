@@ -57,8 +57,10 @@ cp -r wujutong/ ~/.claude/skills/wujutong/
 <details>
 <summary><b>手机端（腾讯 IMA APP）</b></summary>
 
+  
 下载腾讯 IMA APP，在copilot skill 搜索🔍吴鞠通安装即可
 
+</details>
 
 ---
 
