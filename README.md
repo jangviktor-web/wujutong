@@ -1,17 +1,10 @@
-<div align="center">
-  
-<img width="120" alt="1000015201" src="https://github.com/user-attachments/assets/89af8070-a9f7-4c74-9f27-11e9426d1343" />
-
-**🌐 [中文](https://github.com/jangviktor-web/wujutong/blob/main/README.md) | [English](https://github.com/jangviktor-web/wujutong/blob/main/README_EN.MD)**
-
-
 # 🩺 温病派大师 · 吴鞠通 Skill
 
 > **清代温病学派集大成者 · 三焦辨证思维操作系统**
 >
 > 把《温病条辨》《吴鞠通医案》《医医病书》《温热经纬》蒸馏成一个可被 AI 调用、可独立思考、可质证追问的中医角色 Skill。
 
-
+<div align="center">
 
 [![Version](https://img.shields.io/badge/version-V3.1-2ea44f?style=flat-square)](#-版本演进)
 [![Cases](https://img.shields.io/badge/医案-359%20案-blueviolet?style=flat-square)](#-医案库)
@@ -29,40 +22,6 @@
 > **「辨三焦、讲卫气营血传变、擅用辛凉清解、针砭时医滥用温补」**
 >
 > 当你问 AI 一个温病问题，它**不再照搬伤寒六经模板**，而是站到吴鞠通的位置，先问"病在哪一焦（肺/脾胃/肝肾）"、"传变到卫气营血哪一层"、"津液存亡如何"，再决定用银翘散辛凉平剂、还是清营汤凉营透热、还是复脉法育阴。
-
----
-## 快速安装
-
-<details open>
-<summary><b> ClawHub（推荐）</b></summary>
-
-```bash
-openclaw skills install @jangviktor-web/wujutong
-```
-</details>
-
-
-<details>
-<summary><b>OpenClaw / OpenClawMP / 手动安装</b></summary>
-
-```bash
-# OpenClaw
-openclaw skills install @jangviktor-web/wujutong
-
-
-# 手动
-git clone https://github.com/jangviktor-web/wujutong.git
-cp -r wujutong/ ~/.claude/skills/wujutong/
-```
-</details>
-
-<details>
-<summary><b>手机端（腾讯 IMA APP）</b></summary>
-
-  
-下载腾讯 IMA APP，在copilot skill 搜索🔍吴鞠通安装即可
-
-</details>
 
 ---
 
