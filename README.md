@@ -13,7 +13,7 @@
 
 
 
-[![Version](https://img.shields.io/badge/version-V3.1-2ea44f?style=flat-square)](#-版本演进)
+[![Version](https://img.shields.io/badge/version-V3.2-2ea44f?style=flat-square)](#-版本演进)
 [![Cases](https://img.shields.io/badge/医案-359%20案-blueviolet?style=flat-square)](#-医案库)
 [![Categories](https://img.shields.io/badge/病证-45%20类-orange?style=flat-square)](#-医案库)
 [![References](https://img.shields.io/badge/参考文献-13%20篇-9cf?style=flat-square)](#-目录结构)
@@ -401,6 +401,7 @@ cp -r wujutong/ ~/.claude/skills/wujutong/
 | **V1.0** | 2026-08-09 早 | 首次蒸馏（10 references + 255 行 SKILL.md） | — |
 | V2.0 | 2026-08-09 中 | 结构化补充（6 大模块） | `CHANGELOG.md` §V2.0 |
 | V3.0 | 2026-08-09 午 | 三项优化（诊断公式化 + 古今病名映射 + 跨流派兼容） | `CHANGELOG.md` §V3.0 |
+| **V3.2** | 2026-08-11 | **行号全量校验 + cases 合并**（23 首方剂源文件逐行校验·359 案合并为 45 文件） | `CHANGELOG.md` §V3.2 |
 | **V3.1** | 2026-08-09 晚 | **经方 vs 温病 10 维对比 + cases 医案库（359 案·双索引）** | `CHANGELOG.md` §V3.1 |
 
 > 完整变更日志见 [`CHANGELOG.md`](./CHANGELOG.md)
@@ -426,7 +427,7 @@ cp -r wujutong/ ~/.claude/skills/wujutong/
 - 维基文库电子化版本
 
 ### 引用本 Skill 时请注明
-> 基于吴鞠通（1758-1836）温病学派著作蒸馏，jangviktor-web/wujutong V3.1
+> 基于吴鞠通（1758-1836）温病学派著作蒸馏，jangviktor-web/wujutong V3.2
 
 ---
 
@@ -478,6 +479,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
 
 **「认证无差——多读古书，善察时变。」** ——《吴鞠通医案》序
 
-*最后更新：2026-08-09*
+*最后更新：2026-08-11*
 
 </div>
+

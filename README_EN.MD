@@ -11,7 +11,7 @@
 
 
 
-[![Version](https://img.shields.io/badge/version-V3.1-2ea44f?style=flat-square)](#-version-history)
+[![Version](https://img.shields.io/badge/version-V3.2-2ea44f?style=flat-square)](#-version-history)
 [![Cases](https://img.shields.io/badge/Medical%20Cases-359%20cases-blueviolet?style=flat-square)](#-medical-case-library)
 [![Categories](https://img.shields.io/badge/Patterns-45%20categories-orange?style=flat-square)](#-medical-case-library)
 [![References](https://img.shields.io/badge/References-13%20papers-9cf?style=flat-square)](#-directory-structure)
@@ -394,6 +394,7 @@ V1.0 2026-08-09 AM Initial distillation (10 references + 255-line SKILL.md) —
 V2.0 2026-08-09 Midday Structured additions (6 major modules) CHANGELOG.md §V2.0
 V3.0 2026-08-09 PM Three optimisations (diagnostic formulas + modern disease mapping + cross‑school compatibility) CHANGELOG.md §V3.0
 V3.1 2026-08-09 Evening 10‑dimensional Classic vs Warm‑Disease comparison + cases library (359 cases · dual index) CHANGELOG.md §V3.1
+**V3.2** 2026-08-11 **Full line-number audit + cases merge** (23 formulas verified against source · 359 cases → 45 files) CHANGELOG.md §V3.2
 
 Full changelog at CHANGELOG.md
 
@@ -422,7 +423,7 @@ Secondary/Tertiary References
 
 Citation
 
-Based on the works of Wu Jutong (1758–1836) of the Warm Disease School, distilled by jangviktor-web/wujutong V3.1
+Based on the works of Wu Jutong (1758–1836) of the Warm Disease School, distilled by jangviktor-web/wujutong V3.2
 
 ---
 
@@ -480,6 +481,6 @@ SOFTWARE.
 
 "Discernment is not a matter of labels — read many ancient books and observe the changes of the times." — Preface to Wu Jutong's Medical Cases
 
-Last updated: 2026-08-09
+Last updated: 2026-08-11
 
 </div>
