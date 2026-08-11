@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>温病派大师吴鞠通skill · 温病学派AI</title>
+<meta name="description" content="将温病学派集大成者吴鞠通的完整中医思维体系注入 AI Agent。三焦辨证、卫气营血、359 个临床医案、22 首温病方剂——像吴鞠通一样思考。">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f7f5f0;--bg-card:#fff;--bg-elevated:#faf8f2;
+  --red:#c0392b;--red-glow:rgba(192,57,43,.08);
+  --jade:#2d8a4e;--jade-glow:rgba(45,138,78,.1);
+  --amber:#b8860b;--amber-light:#d4a017;
+  --blue:#2c6e9b;--blue-glow:rgba(44,110,155,.08);
+  --text:#2c2c2c;--text-dim:#666;--text-muted:#999;
+  --border:#e5e0d8;--white:#fff;
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--text);background:var(--bg);line-height:1.7;overflow-x:hidden}
+a{color:var(--amber-light);text-decoration:none;transition:color .2s}
+a:hover{color:var(--white)}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;background:rgba(247,245,240,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1rem;color:var(--text)}
+.nav-logo img{width:28px;height:28px;border-radius:6px}
+.nav-links{display:flex;gap:24px;font-size:.85rem}
+.nav-links a{color:var(--text-dim)}
+.nav-links a:hover{color:var(--text)}
+
+/* Hero */
+.hero{padding:140px 20px 100px;text-align:center;position:relative;background:linear-gradient(180deg,#f0ece2 0%,var(--bg) 100%)}
+.hero::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,var(--red-glow) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);border-radius:24px;padding:6px 16px;font-size:.8rem;color:var(--text-dim);margin-bottom:32px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--jade);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(2.2rem,5.5vw,4rem);font-weight:800;margin-bottom:20px;letter-spacing:-1px;line-height:1.2}
+.hero h1 .highlight{background:linear-gradient(135deg,var(--red),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero .subtitle{font-size:1.15rem;color:var(--text-dim);max-width:640px;margin:0 auto 40px;line-height:1.8}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-weight:600;font-size:.95rem;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{background:#c93520;transform:translateY(-1px);box-shadow:0 8px 24px rgba(226,61,40,.3)}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.btn-ghost:hover{border-color:var(--text-dim);background:var(--bg-card)}
+
+/* Counters */
+.counters{display:flex;justify-content:center;gap:48px;margin-top:60px;flex-wrap:wrap}
+.counter{text-align:center}
+.counter .num{font-size:2.5rem;font-weight:800;font-variant-numeric:tabular-nums;color:var(--red);display:block}
+.counter .label{font-size:.8rem;color:var(--text-muted);margin-top:4px}
+
+/* Section Number */
+.sec{padding:100px 20px;position:relative}
+.sec-num{font-size:.75rem;font-weight:700;color:var(--text-muted);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;font-family:"SF Mono","Fira Code",monospace}
+.sec-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;margin-bottom:12px;letter-spacing:-0.5px}
+.sec-subtitle{color:var(--text-dim);font-size:1.05rem;max-width:600px;margin-bottom:48px;line-height:1.8}
+.sec-center{text-align:center}
+.sec-center .sec-subtitle{margin-left:auto;margin-right:auto}
+
+/* Container */
+.container{max-width:1100px;margin:0 auto}
+
+/* Terminal Demo */
+.terminal-section{background:var(--bg-elevated)}
+.terminal{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:12px;overflow:hidden;max-width:760px;margin:0 auto;font-family:"SF Mono","Fira Code","Consolas",monospace;font-size:.85rem;color:#e8e8e8}
+.terminal-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#12121f;border-bottom:1px solid #2a2a3e}
+.terminal-dot{width:10px;height:10px;border-radius:50%}
+.terminal-dot.r{background:#ff5f57}.terminal-dot.y{background:#febc2e}.terminal-dot.g{background:#28c840}
+.terminal-title{margin-left:8px;font-size:.75rem;color:var(--text-muted)}
+.terminal-body{padding:20px;line-height:1.9}
+.terminal-body .prompt{color:var(--jade)}
+.terminal-body .cmd{color:var(--white)}
+.terminal-body .output{color:var(--text-dim)}
+.terminal-body .highlight{color:var(--amber-light)}
+.terminal-body .red{color:var(--red)}
+.terminal-body .blue{color:#7cb7e0}
+
+/* How It Works */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;counter-reset:step}
+.step{position:relative;padding:32px;background:var(--white);border:1px solid var(--border);border-radius:16px;transition:border-color .3s;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.step:hover{border-color:var(--text-muted)}
+.step::before{counter-increment:step;content:"0" counter(step);font-size:3rem;font-weight:800;color:var(--border);position:absolute;top:20px;right:24px;font-family:"SF Mono",monospace}
+.step h3{font-size:1.1rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+.step p{color:var(--text-dim);font-size:.9rem;line-height:1.7}
+.step .step-icon{font-size:1.6rem;margin-bottom:16px;display:block}
+
+/* Features Grid */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.feat-card{padding:28px;background:var(--white);border:1px solid var(--border);border-radius:14px;transition:all .3s;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.feat-card:hover{border-color:var(--text-muted);transform:translateY(-2px)}
+.feat-card .feat-icon{font-size:1.5rem;margin-bottom:12px;display:block}
+.feat-card h4{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.feat-card p{color:var(--text-dim);font-size:.88rem;line-height:1.7}
+.feat-card .feat-tag{display:inline-block;margin-top:12px;padding:3px 10px;border-radius:6px;font-size:.75rem;font-weight:600;background:var(--jade-glow);color:var(--jade)}
+
+/* Quote */
+.quote-section{text-align:center;padding:100px 20px;position:relative}
+.quote-section::before{content:"\201C";font-size:8rem;color:var(--border);position:absolute;top:40px;left:50%;transform:translateX(-50%);font-family:Georgia,serif;line-height:1}
+.quote-section{background:var(--bg)}
+.quote-text{font-size:clamp(1.2rem,2.5vw,1.6rem);font-weight:500;max-width:680px;margin:0 auto 24px;line-height:1.8;color:var(--text);position:relative;z-index:1}
+.quote-author{color:var(--text-muted);font-size:.9rem}
+.quote-author strong{color:var(--text-dim)}
+
+/* Knowledge */
+.know-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.know-item{padding:20px;background:var(--white);border:1px solid var(--border);border-radius:12px;text-align:center;transition:border-color .3s;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.know-item:hover{border-color:var(--text-muted)}
+.know-item .k-num{font-size:1.6rem;font-weight:800;color:var(--red);display:block;margin-bottom:4px}
+.know-item h4{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:2px}
+.know-item p{font-size:.72rem;color:var(--text-muted)}
+
+/* Install */
+.install-section{background:var(--bg-elevated)}
+.install-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.install-card{padding:24px;background:var(--white);border:1px solid var(--border);border-radius:14px;transition:border-color .3s;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.install-card:hover{border-color:var(--text-muted)}
+.install-card h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.install-card h4 .badge{display:inline-block;background:var(--red);color:#fff;font-size:.65rem;padding:2px 8px;border-radius:4px;font-weight:600}
+.install-card pre{background:#1a1a2e;border:1px solid #2a2a3e;border-radius:8px;padding:14px;font-size:.8rem;overflow-x:auto;font-family:"SF Mono",monospace;color:#c8c8d8;line-height:1.7;margin:0}
+
+/* Compatibility Section */
+.compat-section{background:linear-gradient(135deg,#f0ece2,#f7f5f0)}
+.compat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:24px}
+.compat-card{padding:24px;background:var(--white);border:1px solid var(--border);border-radius:14px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.compat-card .comp-icon{font-size:2.2rem;margin-bottom:12px;display:block}
+.compat-card h4{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.compat-card p{color:var(--text-dim);font-size:.85rem;line-height:1.7}
+.compat-card .comp-link{display:inline-block;margin-top:14px;padding:8px 18px;background:var(--blue);color:#fff;border-radius:8px;font-size:.85rem;font-weight:600;transition:all .2s}
+.compat-card .comp-link:hover{background:#22577a;transform:translateY(-1px)}
+
+/* Footer */
+.footer{border-top:1px solid var(--border);padding:40px 20px;text-align:center;background:var(--bg)}
+.footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:16px;flex-wrap:wrap}
+.footer-links a{color:var(--text-dim);font-size:.85rem;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+.footer p{color:var(--text-muted);font-size:.8rem}
+.footer .disclaimer{margin-top:12px;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.6}
+
+/* Responsive */
+@media(max-width:768px){
+  .steps{grid-template-columns:1fr}
+  .know-grid{grid-template-columns:repeat(2,1fr)}
+  .counters{gap:28px}
+  .counter .num{font-size:1.8rem}
+  .nav-links{display:none}
+  .hero{padding:120px 16px 60px}
+  .sec{padding:60px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-logo">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-label="Logo">
+      <defs>
+        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#c0392b"/>
+          <stop offset="100%" stop-color="#b8860b"/>
+        </linearGradient>
+      </defs>
+      <rect x="1" y="1" width="30" height="30" rx="6" fill="url(#logoGrad)"/>
+      <text x="16" y="22" text-anchor="middle" font-size="18" font-weight="700" fill="#fff" font-family="'Songti SC','STSong','SimSun',serif">鞠</text>
+    </svg>
+    温病派大师吴鞠通
+  </div>
+  <div class="nav-links">
+    <a href="#how">工作原理</a>
+    <a href="#demo">对话示例</a>
+    <a href="#features">核心能力</a>
+    <a href="#knowledge">知识库</a>
+    <a href="#install">安装</a>
+    <a href="#compatibility">互补Skill</a>
+    <a href="https://github.com/jangviktor-web/wujutong">GitHub</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span>
+    Claude Code · OpenClaw · SkillHub · IMA Copilot
+  </div>
+  <h1>三百年温病智慧<br><span class="highlight">一个命令激活</span></h1>
+  <p class="subtitle">将清代温病学派集大成者吴鞠通的完整中医思维体系注入 AI Agent。<br>三焦辨证、卫气营血、22 首温病方剂、359 个临床医案——像鞠通一样思考。</p>
+  <div class="hero-cta">
+    <a href="#install" class="btn btn-primary">立即安装</a>
+    <a href="https://github.com/jangviktor-web/wujutong" class="btn btn-ghost">⭐ GitHub 仓库</a>
+  </div>
+  <div class="counters">
+    <div class="counter"><span class="num" data-target="359">0</span><div class="label">临床医案</div></div>
+    <div class="counter"><span class="num" data-target="45">0</span><div class="label">病证分类</div></div>
+    <div class="counter"><span class="num" data-target="22">0</span><div class="label">核心方剂</div></div>
+    <div class="counter"><span class="num" data-target="13">0</span><div class="label">分析文档</div></div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="sec" id="how">
+  <div class="container sec-center">
+    <div class="sec-num">001 / 工作原理</div>
+    <h2 class="sec-title">三步激活温病学思维</h2>
+    <p class="sec-subtitle">从安装到辨证，AI 在数秒内进入吴鞠通角色。</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-icon">📦</span>
+        <h3>安装 Skill</h3>
+        <p>一行命令安装到你的 Agent 环境。支持 IMA / OpenClaw / ClawHub / SkillHub 等多个平台。</p>
+      </div>
+      <div class="step">
+        <span class="step-icon">💬</span>
+        <h3>对话触发</h3>
+        <p>在对话中说「吴鞠通」「温病」「三焦辨证」或直接描述症状，AI 自动切换到温病思维模式。</p>
+      </div>
+      <div class="step">
+        <span class="step-icon">🌡️</span>
+        <h3>三焦辨证</h3>
+        <p>AI 用三焦（上/中/下）+ 卫气营血（深浅）双层框架分析，给出温病方剂、加减化裁、临床警示。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Terminal Demo -->
+<section class="sec terminal-section" id="demo">
+  <div class="container sec-center">
+    <div class="sec-num">002 / 对话示例</div>
+    <h2 class="sec-title">看吴鞠通如何回答</h2>
+    <p class="sec-subtitle">高热神昏抽搐——看吴鞠通如何识别「逆传心包」，启用凉开三宝急救。</p>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot r"></span>
+        <span class="terminal-dot y"></span>
+        <span class="terminal-dot g"></span>
+        <span class="terminal-title">user @ wujutong-skill — 三焦辨证</span>
+      </div>
+      <div class="terminal-body">
+<span class="prompt">user&gt;</span> <span class="cmd">小儿 3 岁，春月发热 4 日，第 5 日起神昏谵语、四肢抽搐、舌绛红，请开方。</span><br>
+<br>
+<span class="prompt">吴鞠通&gt;</span> 春月温邪上受，<span class="highlight">首先犯肺，逆传心包</span>。<br>
+发热 4 日尚在气分；今神昏抽搐、舌绛红——温邪已由气入<span class="red">营</span>矣。<br>
+<br>
+《温病条辨》卷一·第 16 条：<span class="highlight">「邪入心包，舌蹇肢厥，牛黄丸主之。」</span><br>
+<br>
+当用「<span class="highlight">凉开三宝</span>」之首——<span class="blue">安宫牛黄丸</span>。<br>
+此丸芳香辟秽、凉血清心，最擅治高热神昏。<br>
+<br>
+【处方】<br>
+&nbsp;&nbsp;安宫牛黄丸 1 丸，<span class="cmd">每日 1-2 次</span>，温水化开鼻饲<br>
+&nbsp;&nbsp;抽搐甚：加羚羊角粉 1g、钩藤 15g 平肝熄风<br>
+&nbsp;&nbsp;大便秘：合紫雪丹 通腑泄热<br>
+<br>
+<span class="red">⚠️ "认证无差"</span>——小儿神昏抽搐乃<span class="red">化源绝之兆</span>，最为凶险。<br>
+急送医院救治，老夫不敢纸上独任。</div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="sec" id="features" style="background:var(--bg-card)">
+  <div class="container sec-center">
+    <div class="sec-num">003 / 核心能力</div>
+    <h2 class="sec-title">不只是知识库，而是温病学思维方式</h2>
+    <p class="sec-subtitle">覆盖吴鞠通《温病条辨》《吴鞠通医案》《医医病书》《温热经纬》按语完整体系，9 大能力模块。</p>
+    <div class="feat-grid">
+      <div class="feat-card">
+        <span class="feat-icon">🌡️</span>
+        <h4>三焦辨证分析</h4>
+        <p>输入症状，自动定位上焦/中焦/下焦 + 卫气营血传变层次，给出对应温病方剂。</p>
+        <span class="feat-tag">核心</span>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">📋</span>
+        <h4>22 首温病方剂</h4>
+        <p>按三焦分群（辛凉三阶/凉开三宝/承气五方/复脉四阶），每方含组成、加减、禁忌。</p>
+        <span class="feat-tag">22方</span>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🏥</span>
+        <h4>359 案医案库</h4>
+        <p>吴鞠通亲自诊治的临床医案，按 45 个病证分类（含温疫、暑温、湿温、痹证、虚劳等）。</p>
+        <span class="feat-tag">359案</span>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">📚</span>
+        <h4>古今病名映射</h4>
+        <p>40+ 现代病名 ↔ 古代病证双向映射（流感/COVID/肺炎/带状疱疹/痛风…），支持现代问诊。</p>
+        <span class="feat-tag">40+病</span>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🛡️</span>
+        <h4>临床安全层</h4>
+        <p>温病五死法（化源绝预警）+ 白虎四禁 + 湿温三禁 + 31 条用药铁律。</p>
+        <span class="feat-tag">31铁律</span>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🎭</span>
+        <h4>7 段式角色扮演</h4>
+        <p>安全声明 → 引用原文 → 辨证 → 方药 → 警示 → 反思 → 边界，全流程角色一致性。</p>
+        <span class="feat-tag">7段式</span>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🌿</span>
+        <h4>温病分类速查</h4>
+        <p>8 类时令温病（春风温/夏暑温/长夏湿温/秋秋燥/冬冬温）+ 5 维方剂交叉定位。</p>
+        <span class="feat-tag">8类</span>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">⚔️</span>
+        <h4>跨流派对话</h4>
+        <p>与倪海厦 skill（经方派）同台对话，同一病案两种辨证视角，求同存异。</p>
+        <span class="feat-tag">互补</span>
+      </div>
+      <div class="feat-card">
+        <span class="feat-icon">🔬</span>
+        <h4>9 个诊断公式</h4>
+        <p>上焦温病定位 / 中焦承气证 / 下焦复脉证 / 三宝选择 / 卫气营血传变 / 化源绝预警等。</p>
+        <span class="feat-tag">9公式</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote -->
+<section class="quote-section">
+  <div class="container">
+    <div class="quote-text">「认证无差——多读古书，善察时变。」</div>
+    <div class="quote-author">—— <strong>吴鞠通</strong>（1758-1836）·《吴鞠通医案》序</div>
+  </div>
+</section>
+
+<!-- Knowledge Base -->
+<section class="sec" id="knowledge" style="background:var(--bg-card)">
+  <div class="container sec-center">
+    <div class="sec-num">004 / 知识库全景</div>
+    <h2 class="sec-title">3.5MB 一手原文 · 4 部吴鞠通著作</h2>
+    <p class="sec-subtitle">基于《温病条辨》《医医病书》《吴鞠通医案》《温热经纬》吴鞠通按语蒸馏。</p>
+    <div class="know-grid">
+      <div class="know-item"><span class="k-num">359</span><h4>临床医案</h4><p>45 病证分类</p></div>
+      <div class="know-item"><span class="k-num">45</span><h4>病证分类</h4><p>按原书卷一~卷五</p></div>
+      <div class="know-item"><span class="k-num">13</span><h4>分析文档</h4><p>references/</p></div>
+      <div class="know-item"><span class="k-num">22</span><h4>核心方剂</h4><p>按三焦分群</p></div>
+      <div class="know-item"><span class="k-num">4</span><h4>原文模块</h4><p>modules/</p></div>
+      <div class="know-item"><span class="k-num">1483</span><h4>分析行数</h4><p>references 总行</p></div>
+      <div class="know-item"><span class="k-num">31</span><h4>用药铁律</h4><p>临床安全</p></div>
+      <div class="know-item"><span class="k-num">5</span><h4>温病死法</h4><p>化源绝预警</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Compatibility with nihaixia -->
+<section class="sec compat-section" id="compatibility">
+  <div class="container sec-center">
+    <div class="sec-num">005 / 互补 Skill</div>
+    <h2 class="sec-title">一纵一横，合观中医外感病全貌</h2>
+    <p class="sec-subtitle">吴鞠通与倪海厦 Skill 同台调用：急性期从吴（清湿热），缓解期从倪（温肾阳）。</p>
+    <div class="compat-grid">
+      <div class="compat-card">
+        <span class="comp-icon">🧑‍⚕️</span>
+        <h4>倪海厦 · 经方派</h4>
+        <p>六经辨证 + 849 医案<br>驱邪外出 + 该汗则汗<br>修水龙头（治本）</p>
+        <a href="https://github.com/jangviktor-web/nihaixia" class="comp-link">→ nihaixia Skill</a>
+      </div>
+      <div class="compat-card">
+        <span class="comp-icon">🩺</span>
+        <h4>吴鞠通 · 温病派</h4>
+        <p>三焦辨证 + 359 医案<br>存津护阴 + 温病禁汗<br>扫积水（治标）</p>
+        <a href="https://github.com/jangviktor-web/wujutong" class="comp-link">→ wujutong Skill</a>
+      </div>
+      <div class="compat-card">
+        <span class="comp-icon">🤝</span>
+        <h4>双开合参</h4>
+        <p>同一病案两种辨证<br>AI 提示患者体质后再选<br>临床分层使用</p>
+        <a href="#install" class="comp-link">→ 安装方法</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Install -->
+<section class="sec install-section" id="install">
+  <div class="container sec-center">
+    <div class="sec-num">006 / 安装</div>
+    <h2 class="sec-title">选择你的平台</h2>
+    <p class="sec-subtitle">支持 IMA Copilot / OpenClaw / ClawHub / SkillHub / 手动安装。</p>
+    <div class="install-grid">
+      <div class="install-card">
+        <h4>IMA Copilot <span class="badge">已注册</span></h4>
+        <pre>在 IMA 对话中说「吴鞠通」
+或「温病」「三焦辨证」
+自动激活 skill</pre>
+      </div>
+      <div class="install-card">
+        <h4>ClawHub <span class="badge">推荐</span></h4>
+        <pre>clawhub search wujutong
+clawhub install wujutong --no-input</pre>
+      </div>
+      <div class="install-card">
+        <h4>OpenClaw</h4>
+        <pre>openclaw skills install \
+  @jangviktor-web/wujutong</pre>
+      </div>
+      <div class="install-card">
+        <h4>SkillHub（腾讯云）</h4>
+        <pre>curl -fsSL https://skillhub.cn/install/install.sh \
+  | bash -s -- --no-skills
+skillhub install wujutong</pre>
+      </div>
+      <div class="install-card">
+        <h4>GitHub 手动安装</h4>
+        <pre>git clone https://github.com/jangviktor-web/wujutong.git
+cp -r wujutong/ ~/.claude/skills/wujutong/</pre>
+      </div>
+      <div class="install-card">
+        <h4>Claude Code 本地</h4>
+        <pre>cd ~/.claude/skills/
+git clone https://github.com/
+  jangviktor-web/wujutong.git</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="https://github.com/jangviktor-web/wujutong">GitHub</a>
+    <a href="https://clawhub.ai/jangviktor-web/skills/wujutong">ClawHub</a>
+    <a href="https://github.com/jangviktor-web/nihaixia">配套：倪海厦 Skill</a>
+    <a href="https://github.com/jangviktor-web/wujutong/blob/main/LICENSE">MIT License</a>
+  </div>
+  <p>基于中医思维蒸馏器 V3.5 蒸馏 · 蒸馏日期：2026-08-09</p>
+  <p class="disclaimer">本项目内容仅供中医学习与研究，不替代专业医疗诊断。所有诊疗请务必咨询执业医师。</p>
+</footer>
+
+<!-- Star History -->
+<section style="padding:40px 20px;text-align:center;background:var(--bg)">
+<a href="https://repostars.dev/?repos=jangviktor-web%2Fwujutong&theme=grape" target="_blank">
+<img src="https://repostars.dev/api/embed?repo=jangviktor-web%2Fwujutong&theme=grape" alt="RepoStars" style="max-width:100%;height:auto;opacity:.85">
+</a>
+</section>
+
+<script>
+// Animated counters
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})
+},{threshold:.3})
+document.querySelectorAll('.counter').forEach(c=>observer.observe(c))
+
+function animateCounters(){
+  document.querySelectorAll('.counter .num').forEach(el=>{
+    const target=+el.dataset.target
+    const duration=2000
+    const start=performance.now()
+    function tick(now){
+      const progress=Math.min((now-start)/duration,1)
+      const eased=1-Math.pow(1-progress,3)
+      el.textContent=Math.floor(eased*target).toLocaleString()
+      if(progress<1)requestAnimationFrame(tick)
+      else el.textContent=target.toLocaleString()
+    }
+    requestAnimationFrame(tick)
+  })
+}
+const heroObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){animateCounters();heroObserver.unobserve(e.target)}})
+},{threshold:.3})
+heroObserver.observe(document.querySelector('.counters'))
+</script>
+</body>
+</html>
