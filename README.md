@@ -19,7 +19,9 @@
 [![References](https://img.shields.io/badge/参考文献-13%20篇-9cf?style=flat-square)](#-目录结构)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)](#-许可)
 [![GitHub stars](https://img.shields.io/github/stars/jangviktor-web/wujutong?style=flat-square)](https://github.com/jangviktor-web/wujutong)
+
 **🌐 [中文](https://github.com/jangviktor-web/wujutong/blob/main/README.md) | [English](https://github.com/jangviktor-web/wujutong/blob/main/README_EN.MD)**
+
 </div>
 
 ---
