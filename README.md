@@ -52,9 +52,9 @@ openclaw skills install @jangviktor-web/wujutong
 # 腾讯Skillhub 把下面这句话复制到wordbuddy、Qclaw 、openclaw即可安装 
 请根据 https://skillhub.cn/install/skillhub.md，安装 @user_ff4d9420/wujutong。
 
-# 手动
-git clone https://github.com/jangviktor-web/wujutong.git
-cp -r wujutong/ ~/.claude/skills/wujutong/
+# 复制下面github文字，发送给agent即可安装skill
+使用git clone https://github.com/jangviktor-web/wujutong.git，安装skill。
+
 ```
 </details>
 
