@@ -46,12 +46,11 @@ openclaw skills install @jangviktor-web/wujutong
 
 
 <details>
-<summary><b>OpenClaw / OpenClawMP / 手动安装</b></summary>
+<summary><b>OpenClaw / 腾讯Skillhub / 手动安装</b></summary>
 
 ```bash
-# OpenClaw
-openclaw skills install @jangviktor-web/wujutong
-
+# 腾讯Skillhub 把下面这句话负责到wordbuddy、Qclaw 、openclaw即可安装 
+请根据 https://skillhub.cn/install/skillhub.md，安装 @user_ff4d9420/wujutong。
 
 # 手动
 git clone https://github.com/jangviktor-web/wujutong.git
